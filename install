@@ -1,0 +1,45 @@
+# apache gremlin
+
+https://tinkerpop.apache.org/docs/current/reference/
+
+### 1.安装以及运行软件
+--
+https://tinkerpop.apache.org/download.html 下载gremlin console 和 gremlin server
+
+解压后配置remote.xml
+
+default remote:
+
+```xml
+hosts: [localhost]
+port: 8182
+serializer: { className: org.apache.tinkerpop.gremlin.driver.ser.GraphBinaryMessageSerializerV1, config: { serializeResultToString: true }}
+```
+
+azure remote:
+
+``` xml
+hosts: [testcosmos.gremlin.cosmos.azure.cn] 
+port: 443
+username: xxxxxx
+password: xxxxxxxxxxxxxxxxxxxx
+connectionPool: {
+  enableSsl: true,
+  sslSkipCertValidation: true
+}
+serializer: { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV2d0, config: { serializeResultToString: true }}
+```
+
+执行连接命令：
+
+```
+:remote connect tinkerpop.server conf/remote-azure.yaml
+:remote console
+```
+
+检测是否成功
+
+```
+g.V().count()
+```
+
